@@ -8,7 +8,7 @@ export default function StudentList({ students, setStudents, search }) {
     }
   };
 
-  // Search filter
+  // Search filter for student 
   const filtered = students.filter(
     (s) =>
       s.name.toLowerCase().includes(search.toLowerCase()) ||
@@ -17,15 +17,15 @@ export default function StudentList({ students, setStudents, search }) {
 
   return (
     <div>
-      <h3 className="text-xl font-bold mb-4 mt-3.5">📋 Students List</h3>
+      <h3 className="text-xl font-bold mb-4 mt-3.5 lg:text-center text-center"> Students List</h3>
 
       <div className="overflow-x-auto">
-        <table className="table-auto w-full border border-gray-300 rounded-lg">
-          <thead className="bg-blue-400 text-white">
+        <table className="table-auto w-full  border border-gray-300 rounded-lg">
+          <thead className="bg-blue-800 text-white">
             <tr>
-              <th className="px-4 py-2 border">Name</th>
-              <th className="px-4 py-2 border">Class</th>
-              <th className="px-4 py-2 border">Actions</th>
+              <th className="px-4 py-2 border font-medium">Name</th>
+              <th className="px-4 py-2 border font-medium">Class</th>
+              <th className="px-4 py-2 border font-medium">Actions</th>
             </tr>
           </thead>
           <tbody>

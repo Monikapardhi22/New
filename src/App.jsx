@@ -7,7 +7,7 @@ export default function App() {
   const [showAdmin, setShowAdmin] = useState(false);
 
   return (
-    <div className="">
+    <div className="" style={{backgroundColor:'aliceblue'}}>
       {!showAdmin ? (
         <Home onOpenAdmin={() => setShowAdmin(true)} />
       ) : (
