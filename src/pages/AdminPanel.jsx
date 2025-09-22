@@ -11,7 +11,7 @@ export default function AdminPanel({onCloseAdmin}) {
   const [students, setStudents] = useState([]);
   const [search, setSearch] = useState("");
   const [activeTab, setActiveTab] = useState("parents"); // default section
-
+  const[edit,setEdit]=useState("");
   useEffect(() => {
     setParents(getData("parents"));
     setStudents(getData("students"));
@@ -29,9 +29,9 @@ export default function AdminPanel({onCloseAdmin}) {
         Admin Panel 
       </div>
       {/* --- Sidebar --- */}
-      <div className="w-full  p-5 flex items-center justify-around  gap-3" style={{backgroundColor:'aliceblue'}}>
+      <div className="w-full   p-5 flex items-center justify-around  gap-3" style={{backgroundColor:'aliceblue'}}>
       {/* arrow code for back */}
-       <div className="text-3xl cursor-pointer " onClick={onCloseAdmin}>
+       <div className="text-3xl cursor-pointer hover:bg-gray-200 p-5 rounded" onClick={onCloseAdmin}>
         &#8592;
        </div>
 
@@ -70,6 +70,8 @@ export default function AdminPanel({onCloseAdmin}) {
             parents={parents}
             students={students}
             setStudents={setStudents}
+             setEdit={setEdit} 
+              edit={edit}
           />
         )}
 
@@ -92,6 +94,8 @@ export default function AdminPanel({onCloseAdmin}) {
               students={students}
               setStudents={setStudents}
               search={search}
+              setEdit={setEdit} 
+              edit={edit}
             />
           </div>
         )}
