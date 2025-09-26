@@ -13,6 +13,7 @@ export default function App() {
       ) : (
         <AdminPanel onCloseAdmin={() => setShowAdmin(false)} />
       )}
+      
     </div>
   );
 }

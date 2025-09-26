@@ -1,10 +1,16 @@
 import React, { useState } from "react";
 import dlt from "../assets/delete.png";
 
-export default function StudentList({ students, setStudents, search }) {
+export default function StudentList({setActiveTab,setStudentEdit, parents, students, setStudents, search }) {
   const [editId, setEditId] = useState(null);
   const [editName, setEditName] = useState("");
   const [editClass, setEditClass] = useState("");
+  const [editParent, setEditParent] = useState("");
+
+  // new student fields
+  // const [newName, setNewName] = useState("");
+  // const [newClass, setNewClass] = useState("");
+  // const [newParent, setNewParent] = useState("");
 
   const deleteStudent = (id) => {
     if (window.confirm("Delete student?")) {
@@ -12,25 +18,42 @@ export default function StudentList({ students, setStudents, search }) {
     }
   };
 
-  const handleEdit = (student) => {
-    setEditId(student.id);
-    setEditName(student.name);
-    setEditClass(student.class);
-  };
+  // const handleEdit = (student) => {
+  //   setEditId(student.id);
+  //   setEditName(student.name);
+  //   setEditClass(student.className);
+  //   setEditParent(student.parentId);
+  // };
 
   const handleSave = (id) => {
     setStudents(
       students.map((s) =>
-        s.id === id ? { ...s, name: editName, class: editClass } : s
+        s.id === id
+          ? { ...s, name: editName, className: editClass, parentId: editParent }
+          : s
       )
     );
-    setEditId(null); // reset edit mode
+    setEditId(null);
   };
+
+  // const handleAddStudent = () => {
+  //   if (!newName || !newClass || !newParent) {
+  //     alert("Please fill all fields before adding student.");
+  //     return;
+  //   }
+  //   setStudents([
+  //     ...students,
+  //     { id: Date.now(), name: newName, className: newClass, parentId: newParent },
+  //   ]);
+  //   setNewName("");
+  //   setNewClass("");
+  //   setNewParent("");
+  // };
 
   const filtered = students.filter(
     (s) =>
       s.name.toLowerCase().includes(search.toLowerCase()) ||
-      s.class.toLowerCase().includes(search.toLowerCase())
+      s.className.toLowerCase().includes(search.toLowerCase())
   );
 
   return (
@@ -43,13 +66,30 @@ export default function StudentList({ students, setStudents, search }) {
             <tr>
               <th className="px-4 py-2 border font-medium">Name</th>
               <th className="px-4 py-2 border font-medium">Class</th>
+              <th className="px-4 py-2 border font-medium">Parent</th>
               <th className="px-4 py-2 border font-medium">Actions</th>
             </tr>
           </thead>
           <tbody>
+            {/* ADD STUDENT ROW */}
+            <tr className="bg-white text-center">
+           <td colSpan="4" className="text-center py-3 text-gray-500">
+            <button className="px-11 py-2 bg-blue-700 text-white rounded "
+  onClick={() => {
+    setStudentEdit(null);       
+    setActiveTab("students");   
+  }}
+ 
+>
+  Add Student
+</button>
+           </td>
+            </tr>
+
+            {/* EXISTING STUDENTS */}
             {filtered.length === 0 ? (
               <tr>
-                <td colSpan="3" className="text-center py-3 text-gray-500">
+                <td colSpan="4" className="text-center py-3 text-gray-500">
                   No students found
                 </td>
               </tr>
@@ -77,7 +117,26 @@ export default function StudentList({ students, setStudents, search }) {
                         className="border p-1 rounded w-full"
                       />
                     ) : (
-                      student.class
+                      student.className
+                    )}
+                  </td>
+                  <td className="px-4 py-2 border border-gray-300">
+                    {editId === student.id ? (
+                      <select
+                        value={editParent}
+                        onChange={(e) => setEditParent(e.target.value)}
+                        className="border p-1 rounded w-full"
+                      >
+                        <option value="">Select Parent</option>
+                        {parents.map((p) => (
+                          <option key={p.id} value={p.id}>
+                            {p.name}
+                          </option>
+                        ))}
+                      </select>
+                    ) : (
+                      parents.find((p) => p.id === student.parentId)?.name ||
+                      ""
                     )}
                   </td>
                   <td className="px-4 py-2 border border-gray-300 text-center flex justify-center gap-2">
@@ -99,14 +158,17 @@ export default function StudentList({ students, setStudents, search }) {
                     ) : (
                       <>
                         <button
-                          onClick={() => handleEdit(student)}
-                          className="px-2 py-1 bg-yellow-500 text-white rounded"
-                        >
-                          Edit
-                        </button>
+  onClick={() => {
+    setStudentEdit(student);   // 👈 send selected student
+    setActiveTab("students");  // 👈 go to form
+  }}
+  className="px-2 py-1 bg-yellow-500 text-white rounded"
+>
+  Edit
+</button>
                         <button
                           onClick={() => deleteStudent(student.id)}
-                          className="px-2 py-1  text-white rounded"
+                          className="px-2 py-1 text-white rounded"
                         >
                           <img src={dlt} className="w-5 inline" alt="delete" />
                         </button>

@@ -1,47 +1,56 @@
 import React, { useState, useEffect } from "react";
 
-export default function Students({ parents, students, setStudents, edit, setEdit }) {
+export default function Students({ parents, students, setStudents, edit, setActiveTab, studentEdit, setStudentEdit }) {
   const [name, setName] = useState("");
   const [className, setClassName] = useState("");
   const [parentId, setParentId] = useState("");
 
   // Agar edit mode me ho, values set kar do
-  useEffect(() => {
-    if (edit) {
-      setName(edit.name);
-      setClassName(edit.class);
-      setParentId(edit.parentId || ""); // previous parentId bhi set karo
+ useEffect(() => {
+    if (studentEdit) {
+      setName(studentEdit.name);
+      setClassName(studentEdit.className);
+      setParentId(studentEdit.parentId);
+    } else {
+      setName("");
+      setClassName("");
+      setParentId("");
     }
-  }, [edit]);
+  }, [studentEdit]);
 
-  const handleSubmit = (e) => {
+ const handleSubmit = (e) => {
     e.preventDefault();
 
     if (!name || !className || !parentId) {
-      alert("Please fill all fields and select a parent.");
+      alert("Please fill all fields");
       return;
     }
 
-    if (edit) {
-      // update existing student
+    if (studentEdit) {
+      // update student
       setStudents(
         students.map((s) =>
-          s.id === edit.id ? { ...s, name, class: className, parentId } : s
+          s.id === studentEdit.id
+            ? { ...s, name, className, parentId }
+            : s
         )
       );
-      setEdit(null); // reset edit mode
     } else {
       // add new student
       setStudents([
         ...students,
-        { id: Date.now(), name, class: className, parentId },
+        { id: Date.now(), name, className, parentId },
       ]);
     }
 
-    // reset form
+    // reset
+    setStudentEdit(null);
     setName("");
     setClassName("");
     setParentId("");
+
+    // back to student list
+    setActiveTab("studentList");
   };
 
   return (
@@ -72,7 +81,7 @@ export default function Students({ parents, students, setStudents, edit, setEdit
         />
         <br />
 
-        Parent -{" "}
+        
         <select
           value={parentId}
           onChange={(e) => setParentId(e.target.value)}
@@ -90,9 +99,15 @@ export default function Students({ parents, students, setStudents, edit, setEdit
       <div className="text-center">
         <button
           type="submit"
-          className="bg-blue-500 focus:bg-blue-800 mt-4 w-[150px] text-white rounded-md p-2"
+          className="bg-blue-700 focus:bg-blue-800 mt-4 w-[100px] text-white rounded-md p-1"
         >
-          {edit ? "Update Student" : "Add Student"}
+         Add
+        </button>
+         <button 
+          onClick={() => setActiveTab("parentList")} 
+          className="bg-gray-500 ml-3 mt-4 w-[100px] text-white rounded-lg p-1"
+        >
+          Cancel
         </button>
       </div>
     </form>
