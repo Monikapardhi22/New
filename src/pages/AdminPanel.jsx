@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import Parents from "../Components/Parents";
+import Parents from "../components/Parents";
 import Students from "../components/Students";
 import ParentList from "../components/ParentList";
 import StudentList from "../components/StudentList";

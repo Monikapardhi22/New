@@ -24,7 +24,9 @@ export default function Parents({ parents, setParents, setActiveTab, editParent,
   // };
   const addParent = () => {
     if (!name || !phone || !email) return alert("Fill all fields");
-
+  
+  
+    
     if (editParent) {
       // update parent
       setParents(
