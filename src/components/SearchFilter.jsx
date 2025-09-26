@@ -9,7 +9,7 @@ export default function SearchFilter({ search, setSearch }) {
         value={search}
 
         onChange={e => setSearch(e.target.value)}
-        placeholder=" Search by name/class..."
+        placeholder=" Search by name/class(A/B/C)..."
         className=" ml-6 outline-0 "
       />
     </div>

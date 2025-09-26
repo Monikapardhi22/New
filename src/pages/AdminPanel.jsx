@@ -31,9 +31,9 @@ export default function AdminPanel({onCloseAdmin}) {
       <div className="underline text-4xl font-semibold mb-4 pt-6 italic text-center text-blue-700">
         Admin Panel 
       </div>
-      {/* --- Sidebar --- */}
+      
       <div className="w-full   p-5 flex items-center justify-around  gap-3" style={{backgroundColor:'aliceblue'}}>
-      {/* arrow code for back */}
+      
        <div className="text-3xl cursor-pointer hover:bg-gray-200 p-5 rounded" onClick={onCloseAdmin}>
         &#8592;
        </div>
@@ -60,7 +60,7 @@ export default function AdminPanel({onCloseAdmin}) {
         ))}
       </div>
 
-      {/* --- Main Content --- */}
+    
       <div className="flex p-6 items-center justify-center   " style={{backgroundColor:'aliceblue'}}>
         
 
@@ -88,17 +88,7 @@ export default function AdminPanel({onCloseAdmin}) {
           />
         )}
 
-        {/* {activeTab === "parentList" && (
-          <div className="flex flex-col">
-          
-          <ParentList
-            parents={parents}
-            students={students}
-            setParents={setParents}
-            search={search}
-          />
-          </div>
-        )} */}
+      
         {activeTab === "parentList" && (
   <div className="flex flex-col">
     <ParentList
@@ -123,8 +113,8 @@ export default function AdminPanel({onCloseAdmin}) {
               search={search}
               setEdit={setEdit} 
               edit={edit}
-              setActiveTab={setActiveTab}     // 👈 pass karo
-    setStudentEdit={setStudentEdit} // 👈 pass karo
+              setActiveTab={setActiveTab}    
+    setStudentEdit={setStudentEdit} 
             />
           </div>
         )}

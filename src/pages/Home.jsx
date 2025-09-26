@@ -12,7 +12,7 @@ export default function Home({ onOpenAdmin }) {
         </p>
         <button
           onClick={onOpenAdmin}
-          className="bg-white hover:bg-blue-700 text-blue-400 font-medium px-5 py-2.5 rounded-lg transition"
+          className="bg-white hover:bg-blue-700 hover:text-blue-50 text-blue-700 font-medium px-5 py-2.5 rounded-lg transition"
         >
           Open Admin Panel
         </button>

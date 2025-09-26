@@ -7,10 +7,7 @@ export default function StudentList({setActiveTab,setStudentEdit, parents, stude
   const [editClass, setEditClass] = useState("");
   const [editParent, setEditParent] = useState("");
 
-  // new student fields
-  // const [newName, setNewName] = useState("");
-  // const [newClass, setNewClass] = useState("");
-  // const [newParent, setNewParent] = useState("");
+  
 
   const deleteStudent = (id) => {
     if (window.confirm("Delete student?")) {
@@ -18,12 +15,7 @@ export default function StudentList({setActiveTab,setStudentEdit, parents, stude
     }
   };
 
-  // const handleEdit = (student) => {
-  //   setEditId(student.id);
-  //   setEditName(student.name);
-  //   setEditClass(student.className);
-  //   setEditParent(student.parentId);
-  // };
+  
 
   const handleSave = (id) => {
     setStudents(
@@ -36,19 +28,7 @@ export default function StudentList({setActiveTab,setStudentEdit, parents, stude
     setEditId(null);
   };
 
-  // const handleAddStudent = () => {
-  //   if (!newName || !newClass || !newParent) {
-  //     alert("Please fill all fields before adding student.");
-  //     return;
-  //   }
-  //   setStudents([
-  //     ...students,
-  //     { id: Date.now(), name: newName, className: newClass, parentId: newParent },
-  //   ]);
-  //   setNewName("");
-  //   setNewClass("");
-  //   setNewParent("");
-  // };
+  
 
   const filtered = students.filter(
     (s) =>
@@ -67,7 +47,7 @@ export default function StudentList({setActiveTab,setStudentEdit, parents, stude
               <th className="px-4 py-2 border font-medium">Name</th>
               <th className="px-4 py-2 border font-medium">Class</th>
               <th className="px-4 py-2 border font-medium">Parent</th>
-              <th className="px-4 py-2 border font-medium">Actions</th>
+              <th className="px-4 py-2 border font-medium">Action's</th>
             </tr>
           </thead>
           <tbody>
@@ -86,7 +66,7 @@ export default function StudentList({setActiveTab,setStudentEdit, parents, stude
            </td>
             </tr>
 
-            {/* EXISTING STUDENTS */}
+           
             {filtered.length === 0 ? (
               <tr>
                 <td colSpan="4" className="text-center py-3 text-gray-500">
@@ -159,8 +139,8 @@ export default function StudentList({setActiveTab,setStudentEdit, parents, stude
                       <>
                         <button
   onClick={() => {
-    setStudentEdit(student);   // 👈 send selected student
-    setActiveTab("students");  // 👈 go to form
+    setStudentEdit(student);   
+    setActiveTab("students");  
   }}
   className="px-2 py-1 bg-yellow-500 text-white rounded"
 >
